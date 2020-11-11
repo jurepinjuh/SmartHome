@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
   public homeData:SmartHomeData;
   public dataToday:SmartHomeData[];
   constructor(private dataService:DataService) { 
-    this.date.setDate(this.date.getDate()-9);
+    this.date.setDate(this.date.getDate());
     this.dataService.getCurrentData().subscribe(data=>{
       this.homeData=data;
     })
