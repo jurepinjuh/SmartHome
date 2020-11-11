@@ -1,0 +1,35 @@
+.current{
+    height: 200px;
+    text-align: center;
+    line-height: 150px;
+}
+.home-wrapper{
+    margin:0.7em;
+    margin-top: 90px;
+}
+.temp{
+    color: #ffab40;
+}
+.humidity{
+    color:#C21E56;
+}
+.icon{
+    transform: scale(3);
+    
+}
+.text{
+    font-size: 3em;
+    text-shadow: 2px 2px #000;
+}
+
+@media only screen and (min-width: 1200px) {
+    .current{
+        margin-left: 1em;
+    }
+    .text{
+        font-size: 4em;
+    }
+}
+.chart-wrapper{
+    max-height: 500px;
+}

@@ -1,0 +1,46 @@
+<div class="home-wrapper" >
+    <div class="row" *ngIf="homeData">  
+    
+      <div class="current mat-elevation-z4 col-6 col-md-4 col-lg-3" style="vertical-align: middle;">
+        <div class="row">
+            <i class="fa fa-thermometer icon temp" style="font-size: 22px;" ></i>
+        </div>
+        <span class="text humidity">{{homeData.temperature}}℃</span>
+      </div>
+      <div class="current mat-elevation-z4 col-6 col-md-4 col-lg-3" style="vertical-align: middle;"
+      #tooltip="matTooltip"
+      matTooltip="Displaying last recorded data from: {{homeData.dateTime}}"
+      [matTooltipPosition]='"right"'
+      matTooltipHideDelay="100" >
+        <div class="row">
+           <mat-icon class="icon humidity">water_damage</mat-icon>
+        </div>
+        <span class="text temp">{{homeData.humidity}}%</span>
+      </div>
+    </div>
+    <div class="row" *ngIf="dataReady;">
+      <div class="mat-elevation-z4 chart col-12" style="margin-top:1em"  >
+        <app-chart
+      
+        [data]="temps"
+        [hours]="hours"
+        [name]="'TEMPERATURE'"
+        [color]="'#ffab40'">
+
+        </app-chart>
+        
+      </div>
+      <div class="mat-elevation-z4 chart col-12" style="margin-top:1em" >
+        <app-chart
+        [data]="hums"
+        [hours]="hours"
+        [name]="'HUMIDITY'"
+        [color]="'#C21E56'">
+
+        </app-chart>
+        
+      </div>
+      
+    </div>
+</div>
+
