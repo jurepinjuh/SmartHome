@@ -30,7 +30,7 @@ export class SettingsComponent implements OnInit {
     this.dataService.getSettings().subscribe(data=>{
       this.settings=data;
       this.form=this.formBuilder.group({
-        interval:[this.settings.interval,Validators.required],
+        interval:[this.settings.interval,[Validators.required,Validators.min(1)]],
         workFrom:[this.getHoursFromMidnigt(this.settings.workingFrom),Validators.required],
         workTo:[this.getHoursFromMidnigt(this.settings.workingTo),Validators.required]
       });
@@ -55,13 +55,13 @@ export class SettingsComponent implements OnInit {
         timer: 1500
       })
     },err=>{
-      if(err.status==400){
+      
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: 'Working hours from must be earlier than two!'
+          text: 'Something went wrong!'
         })
-      } 
+      
     })
    }
 
