@@ -18,6 +18,10 @@
                 <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">home</mat-icon>
                 Početna
               </a>
+              <a mat-list-item [routerLink]="'/settings'" [routerLinkActive]="'is-active'" [routerLinkActiveOptions]="{ exact: true }">
+                <mat-icon aria-hidden="false" aria-label="Početna" style="margin-right: 15px;">settings</mat-icon>
+                Settings
+              </a>
           
             </mat-nav-list>
           </mat-sidenav>

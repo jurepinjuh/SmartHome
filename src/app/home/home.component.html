@@ -1,13 +1,13 @@
 <div class="home-wrapper" >
     <div class="row" *ngIf="homeData">  
     
-      <div class="current mat-elevation-z4 col-6 col-md-4 col-lg-3" style="vertical-align: middle;">
+      <div class="current mat-elevation-z4 col-6 col-md-5 col-lg-3" style="vertical-align: middle;">
         <div class="row">
             <i class="fa fa-thermometer icon temp" style="font-size: 22px;" ></i>
         </div>
         <span class="text humidity">{{homeData.temperature}}℃</span>
       </div>
-      <div class="current mat-elevation-z4 col-6 col-md-4 col-lg-3" style="vertical-align: middle;"
+      <div class="current mat-elevation-z4 col-6 col-md-5 col-lg-3" style="vertical-align: middle;"
       #tooltip="matTooltip"
       matTooltip="Displaying last recorded data from: {{homeData.dateTime}}"
       [matTooltipPosition]='"right"'
@@ -21,7 +21,7 @@
     <div class="row" *ngIf="dataReady;">
       <div class="mat-elevation-z4 chart col-12" style="margin-top:1em"  >
         <app-chart
-      
+        [resetForm]="restFormSubject.asObservable()"
         [data]="temps"
         [hours]="hours"
         [name]="'TEMPERATURE'"
@@ -32,6 +32,7 @@
       </div>
       <div class="mat-elevation-z4 chart col-12" style="margin-top:1em" >
         <app-chart
+        [resetForm]="restFormSubject.asObservable()"
         [data]="hums"
         [hours]="hours"
         [name]="'HUMIDITY'"

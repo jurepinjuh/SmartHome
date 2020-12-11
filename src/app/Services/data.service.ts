@@ -2,7 +2,9 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/internal/Observable';
 import { SmartHomeData } from '../Models/SmartHomeData';
-import { map } from 'rxjs/operators';
+import { catchError, map } from 'rxjs/operators';
+import { SmartHomeSettings } from '../Models/SmartHomeSettings';
+import { throwError } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -31,4 +33,17 @@ export class DataService {
       map(data => new SmartHomeData().deserialize(data))   
     );
   }
+
+  public getSettings(): Observable<SmartHomeSettings> {
+    return this.httpService.get<SmartHomeSettings>(this.uriPath+'/getSettings').pipe(
+      map(data => new SmartHomeSettings().deserialize(data))   
+    );
+  }
+  public editSettings(formData:SmartHomeSettings):any{
+    return this.httpService.put<any>(this.uriPath + `/update`, formData
+    ).pipe(
+      catchError((err) => throwError(err))
+    );
+  }
+
 }
