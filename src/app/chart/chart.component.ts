@@ -76,10 +76,10 @@ export class ChartComponent implements OnInit {
     this.resetForm.subscribe(reset => {
       if (reset) {
         
-        this.destroyChart();
+        this.myChart.destroy();
         setTimeout(() => {
           this.drawChart();
-        }, 1000); 
+        }, 500); 
       }
     })
 
