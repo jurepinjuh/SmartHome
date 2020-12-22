@@ -80,7 +80,7 @@ export class ChartComponent implements OnInit {
         this.destroyChart();
         setTimeout(() => {
           this.drawChart();
-        }, 100); 
+        }, 1000); 
       }
     })
 
