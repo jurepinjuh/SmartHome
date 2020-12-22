@@ -1,17 +1,20 @@
 import { EventEmitter, Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 @Injectable({
   providedIn: 'root'
 })
 export class NotifyService {
+
+  private notifyPath = environment.apiEndpoint;
 
   newRecordInserted=new EventEmitter<String>();
   constructor() { }
   private hubConnection: signalR.HubConnection
   public startConnection = () => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-                            .withUrl('https://localhost:44386/notify')
+                            .withUrl(this.notifyPath)
                             .build();
     this.hubConnection
       .start()
