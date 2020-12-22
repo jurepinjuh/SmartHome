@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment';
 })
 export class NotifyService {
 
-  private notifyPath = environment.apiEndpoint;
+  private notifyPath = environment.notifyUrl;
 
   newRecordInserted=new EventEmitter<String>();
   constructor() { }
