@@ -5,6 +5,7 @@ import { SmartHomeData } from '../Models/SmartHomeData';
 import { catchError, map } from 'rxjs/operators';
 import { SmartHomeSettings } from '../Models/SmartHomeSettings';
 import { throwError } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class DataService {
   constructor(private httpService: HttpClient) {
   }
   
-  private uriPath="https://localhost:44386/smartHome"
+  private uriPath = environment.apiEndpoint;
 
   public getAll(): Observable<SmartHomeData[]> {
     return this.httpService.get<SmartHomeData[]>(this.uriPath+'/getAll').pipe(
