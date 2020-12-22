@@ -75,8 +75,7 @@ export class ChartComponent implements OnInit {
   ngOnInit(): void {
     this.resetForm.subscribe(reset => {
       if (reset) {
-        console.log(this.data);
-        console.log(this.hours)
+        
         this.destroyChart();
         setTimeout(() => {
           this.drawChart();

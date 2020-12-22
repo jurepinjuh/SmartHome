@@ -39,10 +39,14 @@ export class HomeComponent implements OnInit {
     })
     
     this.dataService.getDataByDate(this.date.toUTCString()).subscribe(data=>{
-      this.dataToday=data;
+      this.dataToday=data;  
+    },
+    (err=>{}),
+    ()=>{
       this.drawChart();
       this.restFormSubject.next(true);
-    })
+    }
+    );
   }
   
   drawChart():void{
@@ -55,7 +59,7 @@ export class HomeComponent implements OnInit {
       var localeSpecificTime = element.toLocaleTimeString();
       this.hours.push(localeSpecificTime.replace(/:\d+ /, ' '));
     });
-   
     this.dataReady=1;
+    
   }
 }
