@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChange } from '@angular/core';
 import * as Chart from 'chart.js';
 import { Subject } from 'rxjs';
 
@@ -13,7 +13,6 @@ export class ChartComponent implements OnInit {
   @Input() hours: any[] = [];
   @Input() name: string;
   @Input() color: string;
-  @Input() resetForm: Subject<Boolean> = new Subject<Boolean>();
   canvas: any;
   ctx: any;
   myChart;
@@ -55,7 +54,6 @@ export class ChartComponent implements OnInit {
   destroyChart(){
     this.myChart.clear();
     var canvas = this.myChart.chart.canvas;
-    console.log(canvas)
   
     // Reset canvas height/width attributes starts a fresh with the canvas context
     canvas.width = this.myChart.chart.width;
@@ -72,17 +70,20 @@ export class ChartComponent implements OnInit {
   
   }
 
-  ngOnInit(): void {
-    this.resetForm.subscribe(reset => {
-      if (reset) {
-        
+  ngOnChanges(changes:SimpleChange) {
+    if('data' in changes){
+      if(this.myChart){
         this.myChart.destroy();
         setTimeout(() => {
           this.drawChart();
-        }, 500); 
+        }, 100);
       }
-    })
-
+     
+    }
+    
+}
+  ngOnInit(): void {
+   
   }
 
 }

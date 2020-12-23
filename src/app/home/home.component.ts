@@ -19,7 +19,6 @@ export class HomeComponent implements OnInit {
   private date=new Date();
   public homeData:SmartHomeData;
   public dataToday:SmartHomeData[];
-  restFormSubject:Subject<Boolean> =new Subject<Boolean>();
   constructor(private dataService:DataService,private notifyService:NotifyService) { 
     this.date.setDate(this.date.getDate());
     this.refreshData();
@@ -34,6 +33,7 @@ export class HomeComponent implements OnInit {
     
   }
   refreshData(){
+   
     this.dataService.getCurrentData().subscribe(data=>{
       this.homeData=data;
     })
@@ -43,17 +43,19 @@ export class HomeComponent implements OnInit {
     },
     (err=>{}),
     ()=>{
-      this.drawChart();
-      this.restFormSubject.next(true);
+      this.dataReady=0;
+      this.drawChart(); 
     }
     );
   }
   
   drawChart():void{
+    this.temps=[];
+    this.hums=[];
+    this.hours=[];
     this.temps=this.dataToday.map(data=>data.temperature);
     let dates=this.dataToday.map(data=>data.dateTime);
-    this.hums=this.dataToday.map(data=>data.humidity);
-    this.hours=[];
+    this.hums=this.dataToday.map(data=>data.humidity); 
     dates.forEach(element => {
       element=new Date(element);
       var localeSpecificTime = element.toLocaleTimeString();
