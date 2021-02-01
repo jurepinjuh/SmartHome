@@ -3,24 +3,34 @@
         <div class="settingsForm" class="col-xs-12 col-sm-12 col-md-12 col-lg-8 col-xl-6 mat-elevation-z4">
             <form [formGroup]="form" style="margin: 2em;" (submit)="update(form.value)">
                 <p>
-                    <mat-form-field style="width: 100%;" color="accent">
-                        <input type="number" min="1" matInput placeholder="Interval in seconds" formControlName="interval">
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field style="width: 100%;" color="accent">
-                        <input placeholder="Working hours from:" matInput aria-label="24hr format" formControlName="workFrom" [ngxTimepicker]="from" [format]="24" readonly>
 
-                        <ngx-material-timepicker #from [theme]="customTheme"></ngx-material-timepicker>
-                    </mat-form-field>
+                    <mat-slide-toggle matInput formControlName="power">Power!</mat-slide-toggle>
+
                 </p>
-                <p>
-                    <mat-form-field style="width: 100%;" color="accent">
-                        <input placeholder="Working hours to:" matInput aria-label="24hr format" formControlName="workTo" [ngxTimepicker]="to" [format]="24" readonly>
-                        <mat-hint>From: 00:00 To: 00:00 (working all day)</mat-hint>
-                        <ngx-material-timepicker #to [theme]="customTheme"></ngx-material-timepicker>
-                    </mat-form-field>
-                </p>
+                <div *ngIf="form.controls['power'].value===true">
+                    <p>
+                        <mat-form-field style="width: 100%;" color="accent">
+                            <input type="number" min="1" matInput placeholder="Interval in seconds" formControlName="interval">
+                        </mat-form-field>
+                    </p>
+
+
+                    <p>
+                        <mat-form-field style="width: 100%;" color="accent">
+                            <input placeholder="Working hours from:" matInput aria-label="24hr format" formControlName="workFrom" [ngxTimepicker]="from" [format]="24" readonly>
+
+                            <ngx-material-timepicker #from [theme]="customTheme"></ngx-material-timepicker>
+                        </mat-form-field>
+                    </p>
+                    <p>
+                        <mat-form-field style="width: 100%;" color="accent">
+                            <input placeholder="Working hours to:" matInput aria-label="24hr format" formControlName="workTo" [ngxTimepicker]="to" [format]="24" readonly>
+                            <mat-hint>From: 00:00 To: 00:00 (working all day)</mat-hint>
+                            <ngx-material-timepicker #to [theme]="customTheme"></ngx-material-timepicker>
+                        </mat-form-field>
+                    </p>
+                </div>
+
 
                 <div class="row justify-content-center">
                     <button type="submit" class="" [disabled]="!form.valid" mat-raised-button color="primary">Update settings</button>

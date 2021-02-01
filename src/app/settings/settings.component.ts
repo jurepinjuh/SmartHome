@@ -32,7 +32,8 @@ export class SettingsComponent implements OnInit {
       this.form=this.formBuilder.group({
         interval:[this.settings.interval,[Validators.required,Validators.min(1)]],
         workFrom:[this.getHoursFromMidnigt(this.settings.workingFrom),Validators.required],
-        workTo:[this.getHoursFromMidnigt(this.settings.workingTo),Validators.required]
+        workTo:[this.getHoursFromMidnigt(this.settings.workingTo),Validators.required],
+        power:[this.settings.power,Validators.required]
       });
     });
    }
@@ -47,6 +48,7 @@ export class SettingsComponent implements OnInit {
     toEdit.interval=formValue.interval;
     toEdit.workingFrom=workFrom;
     toEdit.workingTo=workTo;
+    toEdit.power=formValue.power;
     this.dataService.editSettings(toEdit).subscribe(data=>{
       Swal.fire({
         icon: 'success',

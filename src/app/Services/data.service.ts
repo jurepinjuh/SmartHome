@@ -28,6 +28,11 @@ export class DataService {
       map(data => data.map(data=>new SmartHomeData().deserialize(data)))
     );
   }
+  public getDataByPeriod(from,to): Observable<SmartHomeData[]> {
+    return this.httpService.get<SmartHomeData[]>(this.uriPath+`/getAllbyPeriod/${from}/${to}`).pipe(
+      map(data => data.map(data=>new SmartHomeData().deserialize(data)))
+    );
+  }
 
   public getCurrentData(): Observable<SmartHomeData> {
     return this.httpService.get<SmartHomeData>(this.uriPath+'/getcurrentdata').pipe(
@@ -41,7 +46,7 @@ export class DataService {
     );
   }
   public editSettings(formData:SmartHomeSettings):any{
-    return this.httpService.put<any>(this.uriPath + `/update`, formData
+    return this.httpService.put<any>(this.uriPath + `/updateSettings`, formData
     ).pipe(
       catchError((err) => throwError(err))
     );
